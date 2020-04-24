@@ -55,9 +55,25 @@ strLengthDifference([ "bb", "dddd", "a", "ccc"])
 // ******* QUESTION 3 *******
 // Write a method that takes two numbers and returns true if the greatest common denominator of the two numbers is even and false if it is odd.
 
-function isGCDEven(n1, n2){
-  let gcd = 0; 
+function findGCD(n1, n2){
+  let smaller = Math.min(n1, n2);
+  let larger = Math.max(n1, n2);
 
+  if (larger % smaller === 0){
+    return smaller
+  } else {
+    return findGCD(smaller, larger % smaller)
+  }
+}
+
+function isGCDEven(n1, n2){
+  let gcd = findGCD(n1, n2)
+
+  if (gcd % 2 === 0){
+    return true;
+  } else {
+    return false;
+  }
 }
 
 /* 
@@ -67,9 +83,10 @@ function isGCDEven(n1, n2){
 
   isGCDEven(10, 5) ==> return false;
 
-  1. declare GCD variable and set to 0;
-  2. write function / loop
-  3. return true or false 
+  1. declare a smaller num variable and a larger num variable, use Math.min + Math.max 
+  2. recursive solution, the termination block:
+    if the remainder of the larger num divided by smaller num is zero (equally divided), then return smaller var
+  3. or else, return gcd function 
 */
 
 ```
